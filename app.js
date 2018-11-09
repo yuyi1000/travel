@@ -76,6 +76,17 @@ app.get('/travel/:id/edit', (req, res) => {
 })
 
 
+app.put('/travel/:id', (req, res) => {
+    City.findByIdAndUpdate(req.params.id, req.body.city, (err, city) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.redirect('/travel/' + req.params.id);
+        }
+    })
+})
+
+
 app.delete('/travel/:id', (req, res) => {
     City.findByIdAndRemove(req.params.id, (err) => {
         if (err) {
