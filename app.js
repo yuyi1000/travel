@@ -3,12 +3,13 @@ var mongoose = require('mongoose');
 
 var app = express()
 var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
 
 mongoose.connect('mongodb://localhost/travel_app', { useNewUrlParser: true });
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
-
+app.use(methodOverride('_method'));
 
 var citySchema = new mongoose.Schema({
     name: String,
@@ -56,10 +57,24 @@ app.post('/travel', (req, res) => {
 
 app.get('/travel/:id', (req, res) => {
     City.findById(req.params.id, (err, city) => {
-        res.render('show', {city});
+        if (err) {
+            console.log(err);
+        } else {
+            res.render('show', {city});
+        }
     })
 })
 
+
+app.delete('/travel/:id', (req, res) => {
+    City.findByIdAndRemove(req.params.id, (err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.redirect('/travel');
+        }
+    })
+})
 
 
 
