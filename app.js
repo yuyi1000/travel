@@ -45,8 +45,6 @@ app.get('/travel/new', (req, res) => {
 })
 
 app.post('/travel', (req, res) => {
-    console.log(req);
-    
     City.create(req.body.city, (err, city) => {
         if (err) {
             console.log(err);
@@ -55,6 +53,14 @@ app.post('/travel', (req, res) => {
         }
     })
 })
+
+app.get('/travel/:id', (req, res) => {
+    City.findById(req.params.id, (err, city) => {
+        res.render('show', {city});
+    })
+})
+
+
 
 
 app.listen(3000, function(){
