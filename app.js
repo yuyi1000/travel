@@ -17,13 +17,13 @@ var citySchema = new mongoose.Schema({
 
 var City = mongoose.model('City', citySchema);
 
-var sf = new City({
-    name: "San Francsico",
-    image: "https://pixabay.com/get/eb34b30d2cfd1c22d2524518b7444795ea76e5d004b0144594f7c07ca3e8b3_340.jpg",
-    body: "a city must see"
-})
+// var sf = new City({
+//     name: "San Francsico",
+//     image: "https://pixabay.com/get/eb34b30d2cfd1c22d2524518b7444795ea76e5d004b0144594f7c07ca3e8b3_340.jpg",
+//     body: "a city must see"
+// })
 
-sf.save();
+// sf.save();
 
 app.get('/', (req, res) => {
     res.redirect('/travel');
@@ -38,6 +38,12 @@ app.get('/travel', (req, res) => {
         }
     })
 })
+
+app.get('/travel/new', (req, res) => {
+    res.render('new');
+})
+
+
 
 
 app.listen(3000, function(){

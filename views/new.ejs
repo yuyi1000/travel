@@ -1,0 +1,22 @@
+<% include ./partials/header %>
+
+<div class='ui container main text'>
+    <div class="ui huge header">New Destination City</div>
+    <form class="ui form" action="/travel" method="POST">
+        <div class="field">
+            <label>City Name</label>
+            <input type="text" name="city[name]" placeholder="city name">
+        </div>
+        <div class="field">
+            <label>Image</label>
+            <input type="text" name="city[image]" placeholder="image">
+        </div>
+        <div class="field">
+            <label>Description</label>
+            <textarea name="city[body]"></textarea>
+        </div>
+        <input class="ui violet big basic button" type="submit">
+    </form>
+</div>
+    
+<% include ./partials/footer %>
