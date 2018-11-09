@@ -65,6 +65,16 @@ app.get('/travel/:id', (req, res) => {
     })
 })
 
+app.get('/travel/:id/edit', (req, res) => {
+    City.findById(req.params.id, (err, city) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.render('edit', {city});
+        }
+    })
+})
+
 
 app.delete('/travel/:id', (req, res) => {
     City.findByIdAndRemove(req.params.id, (err) => {
