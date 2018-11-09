@@ -6,6 +6,8 @@ var app = express()
 
 mongoose.connect('mongodb://localhost/travel_app', { useNewUrlParser: true });
 app.set('view engine', 'ejs');
+app.use(express.static('public'));
+
 
 app.get('/', (req, res) => {
     res.redirect('/travel');
