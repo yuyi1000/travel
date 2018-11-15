@@ -5,19 +5,15 @@ var app = express()
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
+var City = require('./models/city');
+
+mongoose.set('useCreateIndex', true);
 mongoose.connect('mongodb://localhost/travel_app', { useNewUrlParser: true });
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
 
-var citySchema = new mongoose.Schema({
-    name: String,
-    image: String,
-    body: String
-})
-
-var City = mongoose.model('City', citySchema);
 
 // var sf = new City({
 //     name: "San Francsico",
