@@ -31,6 +31,11 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 
+app.use(function(req, res, next) {
+    res.locals.user = req.user;
+    next();
+})
+
 // var sf = new City({
 //     name: "San Francsico",
 //     image: "https://pixabay.com/get/eb34b30d2cfd1c22d2524518b7444795ea76e5d004b0144594f7c07ca3e8b3_340.jpg",

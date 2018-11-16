@@ -10,9 +10,14 @@
                 <div class="header item"><i class="camera icon"></i>Travel Site</div>
                 <a href="/" class="item">Home</a>
                 <a href="/travel/new" class="item">New Destination</a>
-                
-                <a href="/login" class="item right">Login</a>
-                <a href="/register" class="item">Sign Up</a>
-                <a href="/logout" class="item">Logout</a>
+
+                <% if(!user){ %>
+                    <a href="/login" class="item right">Login</a>
+                    <a href="/register" class="item">Sign Up</a>
+                <% } else { %>
+                    <a href='#' class="item right">Welcome <%= user.username %></a>
+                    <a href="/logout" class="item">Logout</a>
+                <% } %>
+
             </div>
         </div>
