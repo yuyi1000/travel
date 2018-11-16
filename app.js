@@ -145,6 +145,12 @@ app.post('/login', passport.authenticate("local", {
 }), (req, res) => {})
 
 
+app.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/travel');
+})
+
+
 app.listen(3000, function(){
     console.log("SERVER IS RUNNING!");
 })
