@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
 var passport = require('passport');
+var LocalStrategy = require('passport-local');
 
 var City = require('./models/city');
 var User = require('./models/user');
@@ -16,6 +17,18 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
+
+// PASSPORT CONFIGURATION
+app.use(require("express-session")({
+    secret: "hello world.",
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 
 // var sf = new City({
@@ -121,7 +134,10 @@ app.get('/login', (req, res) => {
 })
 
 
-
+app.post('/login', passport.authenticate("local", {
+    successRedirect: '/travel',
+    failureRedirect: '/login'
+}), (req, res) => {})
 
 
 app.listen(3000, function(){
