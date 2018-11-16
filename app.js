@@ -58,11 +58,11 @@ app.get('/travel', (req, res) => {
     })
 })
 
-app.get('/travel/new', (req, res) => {
+app.get('/travel/new', isLoggedIn, (req, res) => {
     res.render('new');
 })
 
-app.post('/travel', (req, res) => {
+app.post('/travel', isLoggedIn, (req, res) => {
     City.create(req.body.city, (err, city) => {
         if (err) {
             console.log(err);
@@ -82,7 +82,7 @@ app.get('/travel/:id', (req, res) => {
     })
 })
 
-app.get('/travel/:id/edit', (req, res) => {
+app.get('/travel/:id/edit', isLoggedIn, (req, res) => {
     City.findById(req.params.id, (err, city) => {
         if (err) {
             console.log(err);
@@ -93,7 +93,7 @@ app.get('/travel/:id/edit', (req, res) => {
 })
 
 
-app.put('/travel/:id', (req, res) => {
+app.put('/travel/:id', isLoggedIn, (req, res) => {
     City.findByIdAndUpdate(req.params.id, req.body.city, (err, city) => {
         if (err) {
             console.log(err);
@@ -104,7 +104,7 @@ app.put('/travel/:id', (req, res) => {
 })
 
 
-app.delete('/travel/:id', (req, res) => {
+app.delete('/travel/:id', isLoggedIn, (req, res) => {
     City.findByIdAndRemove(req.params.id, (err) => {
         if (err) {
             console.log(err);
@@ -149,6 +149,14 @@ app.get('/logout', (req, res) => {
     req.logout();
     res.redirect('/travel');
 })
+
+
+function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect("/login");
+}
 
 
 app.listen(3000, function(){
