@@ -94,6 +94,11 @@ app.delete('/travel/:id', (req, res) => {
 })
 
 
+app.get('/login', (req, res) => {
+    res.render('login');
+})
+
+
 
 app.listen(3000, function(){
     console.log("SERVER IS RUNNING!");
