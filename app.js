@@ -5,7 +5,10 @@ var app = express()
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
+var passport = require('passport');
+
 var City = require('./models/city');
+var User = require('./models/user');
 
 mongoose.set('useCreateIndex', true);
 mongoose.connect('mongodb://localhost/travel_app', { useNewUrlParser: true });
@@ -99,7 +102,16 @@ app.get('/register', (req, res) => {
 })
 
 app.post('/register', (req, res) => {
-
+    var newUser = new User({username: req.body.username});
+    User.register(newUser, req.body.password, function(err, user) {
+        if(err){
+            console.log(err);
+            return res.render("register");
+        }
+        passport.authenticate("local")(req, res, function(){
+           res.redirect("/travel"); 
+        });
+    })
 })
 
 
