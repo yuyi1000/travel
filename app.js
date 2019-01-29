@@ -161,7 +161,7 @@ function isLoggedIn(req, res, next){
 }
 
 
-app.listen(process.env.PORT || 3000, process.env.IP || 'localhost', function(){
+app.listen(process.env.PORT || 3000, function(){
     console.log("SERVER IS RUNNING!");
 })
 
