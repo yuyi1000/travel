@@ -12,7 +12,9 @@ var City = require('./models/city');
 var User = require('./models/user');
 
 mongoose.set('useCreateIndex', true);
-mongoose.connect('mongodb://localhost/travel_app', { useNewUrlParser: true });
+
+var url = process.env.DATABASEURL || "mongodb://localhost/travel_app";
+mongoose.connect(url, { useNewUrlParser: true });
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
