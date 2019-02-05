@@ -1,4 +1,4 @@
-# Traveling Destination App
+# [Traveling Destination App](https://radiant-sea-17026.herokuapp.com/travel)
 
 <img src='public/imgs/travel-demo.png' width='300px' alt='demo of app' />
 
